@@ -1,3 +1,5 @@
+const assert = require('assert');
+require('jsdom-global')()
 
 let beers = [];
 
@@ -50,3 +52,38 @@ const displayBeer = () => {
     }
     document.getElementById("img").innerHTML = imgText;
 }
+
+describe('getBeers', () => {
+    it('fetches API data', () => {
+        const fakeFetch = url => {
+            assert(url==='https://api.punkapi.com/v2/beers/')
+            return new Promise(function(resolve) {
+
+        })
+        }
+        
+       getBeers(fakeFetch);
+    })}),
+
+describe('getBeer', () => {
+    it('fetches the correct beer', (done) => {
+        const fakeFetch = url => {
+            assert(url==='https://api.punkapi.com/v2/beers/10')
+            
+            return Promise.resolve({
+                json: () => Promise.resolve({
+                results: [
+                    {"name":"Bramling X"}
+                ] 
+            })
+        })
+    }
+    getBeer(fakeFetch) 
+     .then(result => {
+        assert(result[0].name === 'Bramling X')
+        done();
+     })
+    })
+   })
+
+
