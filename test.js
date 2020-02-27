@@ -3,10 +3,10 @@ require('jsdom-global')()
 
 let beers = [];
 
-window.onload = () => {
-    getBeers(window.fetch);
+// window.onload = () => {
+//     getBeers(window.fetch);
     
-}
+// }
 
 const getBeer = (fetch, id) => {
     fetch('https://api.punkapi.com/v2/beers/' + id)
@@ -19,7 +19,7 @@ const getBeer = (fetch, id) => {
         console.log(beers);
         displayBeer();
     })
-    .catch(err => document.getElementById("text").innerHTML= `Error,  ${err}`);
+    .catch(err => `Error,  ${err}`);
 
 }
 
@@ -50,7 +50,7 @@ const displayBeer = () => {
                           ${beers[0][i].description}<br/>
                           ${beers[0][i].tagline}</div></div>`;
     }
-    document.getElementById("img").innerHTML = imgText;
+   // document.getElementById("img").innerHTML = imgText;
 }
 
 describe('getBeers', () => {
@@ -63,27 +63,36 @@ describe('getBeers', () => {
         }
         
        getBeers(fakeFetch);
-    })}),
+    }),
 
-describe('getBeer', () => {
-    it('fetches the correct beer', (done) => {
+
+    it('mistyped address', () => {
         const fakeFetch = url => {
-            assert(url==='https://api.punkapi.com/v2/beers/10')
-            
-            return Promise.resolve({
-                json: () => Promise.resolve({
-                results: [
-                    {"name":"Bramling X"}
-                ] 
+            assert(url="himom")
+            return new Promise(function(resolve) {
+                 
             })
-        })
-    }
-    getBeer(fakeFetch) 
-     .then(result => {
-        assert(result[0].name === 'Bramling X')
-        done();
-     })
+        }
+        getBeers(fakeFetch)
     })
-   })
+      it('catches out of range', () => {
+            const fakeFetch = url => {
+                assert(url='https://api.punkapi.com/v2/beers?page=99&per_page=80.com/v2/beers/')
+                return new Promise(function(resolve) {
+    
+            })
+            }
+            
+           getBeers(fakeFetch);
+    })
+
+    
+    })
+
+  
+
+
+
+
 
 
