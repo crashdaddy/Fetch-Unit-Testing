@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/crashdaddy/Fetch-Unit-Testing#readme",
   "devDependencies": {
-    "jsdom": "16.2.0",
+    "jsdom": "16.5.0",
     "jsdom-global": "3.0.2"
   }
 }
